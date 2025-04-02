@@ -3,6 +3,7 @@
   "description": "A scaffolding for npm packages written in TypeScript",
   "private": false,
   "version": "0.0.3",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,13 +18,14 @@
     "./package.json": "./package.json"
   },
   "scripts": {
+    "start": "tsx ./src/index.ts",
     "ts-types": "tsc --emitDeclarationOnly",
     "check": "npm run prettier && npm run lint && npm test",
     "build": "npm run check && rimraf dist && NODE_ENV=production node esbuild.js && npm run ts-types",
     "prettier": "prettier --write ./src",
     "lint": "eslint ./src --ext .ts",
-    "dev": "jest --watch",
     "test": "jest --no-cache",
+    "test:watch": "jest --watch",
     "coverage": "jest --coverage",
     "release:common": "npm run build && git push --follow-tags origin main && npm publish --access public",
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'docs: updated changelog' && npm version patch && npm run release:common",
@@ -47,6 +49,7 @@
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
+    "tsx": "^4.19.3",
     "typescript": "^5.3.3"
   },
   "lint-staged": {
@@ -66,5 +69,8 @@
     "package",
     "typescript",
     "scaffolding"
-  ]
+  ],
+  "dependencies": {
+    "winston": "^3.17.0"
+  }
 }
